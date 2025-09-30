@@ -23,47 +23,50 @@ const Inventory: React.FC = () => {
     return matchesSearch && matchesStatus && matchesCategory;
   });
 
-  const handleAddComputer = () => {
+
+  // const handleEditComputer = (computer: Computer) => {
+  //   setSelectedComputer(computer);
+  //   setIsEditing(true);
+  //   setIsModalOpen(true);
+  // };
+
+  // const handleDeleteComputer = (id: string) => {
+  //   setComputers(computers.filter(c => c.id !== id));
+  // };
+
+  // const handleSaveComputer = (computerData: Partial<Computer>) => {
+  //   if (isEditing && selectedComputer) {
+  //     setComputers(computers.map(c => 
+  //       c.id === selectedComputer.id ? { ...c, ...computerData } : c
+  //     ));
+  //   } else {
+  //     const { id , ...rest } = computerData as Computer;
+  //     const newComputer: Computer = {
+  //       id : Date.now().toString(),
+  //       ...rest,
+  //     };
+  //     setComputers([...computers, newComputer]);
+  //   }
+  //   setIsModalOpen(false);
+  // };
+
+  // const getStatusColor = (status: string) => {
+  //   switch (status) {
+  //     case 'Available': return 'bg-green-100 text-green-800';
+  //     case 'Rented': return 'bg-blue-100 text-blue-800';
+  //     case 'Maintenance': return 'bg-yellow-100 text-yellow-800';
+  //     case 'Retired': return 'bg-gray-100 text-gray-800';
+  //     default: return 'bg-gray-100 text-gray-800';
+  //   }
+  // };
+
+
+    const handleAddComputer = () => {
     setSelectedComputer(null);
     setIsEditing(false);
     setIsModalOpen(true);
   };
 
-  const handleEditComputer = (computer: Computer) => {
-    setSelectedComputer(computer);
-    setIsEditing(true);
-    setIsModalOpen(true);
-  };
-
-  const handleDeleteComputer = (id: string) => {
-    setComputers(computers.filter(c => c.id !== id));
-  };
-
-  const handleSaveComputer = (computerData: Partial<Computer>) => {
-    if (isEditing && selectedComputer) {
-      setComputers(computers.map(c => 
-        c.id === selectedComputer.id ? { ...c, ...computerData } : c
-      ));
-    } else {
-      const { id , ...rest } = computerData as Computer;
-      const newComputer: Computer = {
-        id : Date.now().toString(),
-        ...rest,
-      };
-      setComputers([...computers, newComputer]);
-    }
-    setIsModalOpen(false);
-  };
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'Available': return 'bg-green-100 text-green-800';
-      case 'Rented': return 'bg-blue-100 text-blue-800';
-      case 'Maintenance': return 'bg-yellow-100 text-yellow-800';
-      case 'Retired': return 'bg-gray-100 text-gray-800';
-      default: return 'bg-gray-100 text-gray-800';
-    }
-  };
 
   const ComputerForm = () => {
     const [formData, setFormData] = useState<Partial<Computer>>(
@@ -88,7 +91,7 @@ const Inventory: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
-      handleSaveComputer(formData);
+      // handleSaveComputer(formData);
     };
 
     return (
@@ -355,7 +358,7 @@ const Inventory: React.FC = () => {
                     {computer.brand} {computer.model}
                   </h3>
                 </div>
-                <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(computer.status)}`}>
+                <span className={`px-2 py-1 text-xs font-medium rounded-full `}>
                   {computer.status}
                 </span>
               </div>
@@ -399,13 +402,13 @@ const Inventory: React.FC = () => {
                 </div>
                 <div className="flex space-x-2">
                   <button
-                    onClick={() => handleEditComputer(computer)}
+                    // onClick={() => handleEditComputer(computer)}
                     className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                   >
                     <Edit className="h-4 w-4" />
                   </button>
                   <button
-                    onClick={() => handleDeleteComputer(computer.id)}
+                    // onClick={() => handleDeleteComputer(computer.id)}
                     className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                   >
                     <Trash2 className="h-4 w-4" />

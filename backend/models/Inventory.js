@@ -1,13 +1,64 @@
 const mongoose = require('mongoose');
 
 const inventorySchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  type: { type: String, required: true },
-  serialNumber: { type: String, required: true, unique: true },
-  status: { type: String, enum: ['available', 'rented', 'maintenance'], default: 'available' },
-  location: { type: String },
-  purchaseDate: { type: Date },
-  price: { type: Number }
+ 
+  brand:{
+    type:String,
+    required:true,
+  },
+  model:{
+    type:String,
+    required:true,
+  },
+  processor:{
+    type:String,
+    required:true,
+  },
+  ram:{
+    type:String,
+    required:true,
+  },
+  storage:{
+    type:String,
+    required:true,
+  },
+  graphics:{
+    type:String,
+    required:true,
+  },
+  category:{
+    type:String,
+    required:true,
+  },
+    status:{
+    type:String,
+    required:true,
+  },
+  dailyRate:{
+    type:String,
+    required:true,
+  },
+  weeklyRate:{
+    type:String,
+    required:true,
+  },
+  monthlyRate:{
+    type:String,
+    required:true,
+  },
+  serialNumber:{
+    type:String,
+    required:true,
+  },
+  purchaseDate:{
+    type:String,
+    required:true,
+  },
+  notes:{
+    type:String,
+    required:true,
+  },
+
 }, { timestamps: true });
 
 module.exports = mongoose.model('Inventory', inventorySchema);

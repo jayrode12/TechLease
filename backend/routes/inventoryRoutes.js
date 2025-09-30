@@ -4,7 +4,7 @@ const { getAllInventory, createInventory, updateInventory } = require('../contro
 const authMiddleware = require('../middleware/authMiddleware');
 
 router.get('/', authMiddleware, getAllInventory);
-router.post('/', authMiddleware, createInventory);
+router.post('/', createInventory);
 router.put('/:id', authMiddleware, updateInventory);
 
 module.exports = router;
