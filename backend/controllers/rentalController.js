@@ -11,20 +11,50 @@ exports.getAllRentals = async (req, res, next) => {
 
 exports.createRental = async (req, res, next) => {
   try {
-    const { customerName, inventoryId, rentDate, returnDate } = req.body;
-    if (!customerName || !inventoryId || !rentDate || !returnDate) {
-      return res.status(400).json({ message: 'All fields are required' });
+    const {
+      customer,
+      computer,
+      startdate,
+      enddate,
+      dailyrate,
+      deposit,
+      totalcost,
+      status,
+      paymentstatus,
+    } = req.body;
+
+    if (
+      !customer ||
+      !computer ||
+      !startdate ||
+      !enddate ||
+      !dailyrate ||
+      !deposit ||
+      !totalcost ||
+      !status ||
+      !paymentstatus
+    ) {
+      return res
+        .status(400)
+        .json({ message: "Please fill all the required fields" });
     }
 
-    const rental = await Rental.create({
-      customerName,
-      inventoryId,
-      rentDate,
-      returnDate,
-      status: 'rented'
-    });
+    const payload = {
+      customer,
+      computer,
+      startdate,
+      enddate,
+      dailyrate,
+      deposit,
+      totalcost,
+      status,
+      paymentstatus,
+    };
+    
+    const item = new Rental(payload); 
+    await item.save();
 
-    res.status(201).json({ message: 'Rental created successfully', data: rental });
+    res.status(201).json({ message: "Item created", data: item });
   } catch (error) {
     next(error);
   }

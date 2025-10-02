@@ -1,11 +1,15 @@
 const mongoose = require('mongoose');
 
 const rentalSchema = new mongoose.Schema({
-  customerName: { type: String, required: true },
-  inventoryId: { type: String, required: true },
-  rentDate: { type: Date, required: true },
-  returnDate: { type: Date, required: true },
-  status: { type: String, enum: ['rented', 'returned'], default: 'rented' }
+  customer : {  type : String, required : true, },
+  computer : { type:String, required:true,},
+  startdate : { type:String, required:true,},
+  enddate : { type:String, required:true, },
+  dailyrate : {  type:String, required:true,},
+  deposit : { type:String, required:true,},
+  totalcost : { type:String, required:true,},
+  status : { type:String, required:true,  },
+  paymentstatus : { type:String, required:true, }
 }, { timestamps: true });
 
 module.exports = mongoose.model('Rental', rentalSchema);

@@ -4,7 +4,7 @@ const { getAllRentals, createRental, updateRental } = require('../controllers/re
 const authMiddleware = require('../middleware/authMiddleware');
 
 router.get('/', authMiddleware, getAllRentals);
-router.post('/', authMiddleware, createRental);
+router.post('/', createRental);
 router.put('/:id', authMiddleware, updateRental);
 
 module.exports = router;

@@ -5,6 +5,7 @@ const cors = require('cors');
 
 const authRoutes = require('./routes/authRoutes');
 const rentalRoutes = require('./routes/rentalRoutes');
+const customerRoutes = require('./routes/customerRoutes');
 const inventoryRoutes = require('./routes/inventoryRoutes');
 const errorHandler = require('./middleware/errorHandler');
 
@@ -24,6 +25,7 @@ mongoose.connect("mongodb+srv://jaycomputers:Jaycomputers@cluster0.l9m2yjw.mongo
 app.use('/api/auth', authRoutes);
 app.use('/api/rentals', rentalRoutes);
 app.use('/api/inventory', inventoryRoutes);
+app.use('/api/customers', customerRoutes);
 
 app.use(errorHandler);
 

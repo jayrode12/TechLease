@@ -1,10 +1,10 @@
 // customerControllers.js
 
-const Customer = require('../models/customer.model'); // Adjust path as needed
+const Customer = require('../models/Customer.js'); // Adjust path as needed
 const mongoose = require('mongoose');
 
 // GET all customers
-exports.getCustomers = async (req, res) => {
+exports.getCustomer = async (req, res) => {
   try {
     const customers = await Customer.find();
     res.status(200).json(customers);
@@ -31,16 +31,62 @@ exports.getCustomerById = async (req, res) => {
 };
 
 // CREATE a new customer
-exports.createCustomer = async (req, res) => {
+exports.addCustomer = async (req, res, next) => {
   try {
-    const customer = new Customer(req.body);
-    await customer.save();
-    res.status(201).json(customer);
+    const {
+      firstName,
+      lastName,
+      email,
+      phone,
+      company,
+      address,
+      city,
+      state,
+      zipCode,
+      status,
+      notes
+    } = req.body;
+
+    if (
+      !firstName ||
+      !lastName ||
+      !email ||
+      !phone ||
+      !company ||
+      !address ||
+      !city ||
+      !state ||
+      !zipCode ||
+      !status ||
+      !notes
+    ) {
+      return res
+        .status(400)
+        .json({ message: "Please fill all the required fields" });
+    }
+
+    const payload = {
+      firstName,
+      lastName,
+      email,
+      phone,
+      company,
+      address,
+      city,
+      state,
+      zipCode,
+      status,
+      notes
+    };
+    
+    const item = new Customer(payload); 
+    await item.save();
+
+    res.status(201).json({ message: "Customer item created", data: item });
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    next(error);
   }
 };
-
 // UPDATE a customer by ID
 exports.updateCustomer = async (req, res) => {
   const { id } = req.params;
